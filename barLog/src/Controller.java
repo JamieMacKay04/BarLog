@@ -1,11 +1,15 @@
 package barLog.src;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,9 +39,7 @@ public class Controller {
     @FXML private ListView<String> lstItems;
     private static final HttpClient HTTP = HttpClient.newHttpClient();
     private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static final HttpClient HTTP = HttpClient.newHttpClient();
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static final Path CACHE = Paths.get("barLog_cache.csv"); // saved beside where you run the app
+    private static final Path CACHE = Paths.get("data", "barLog_cache.csv"); // saved beside where you run the app
     private final Map<String, String> cache = new HashMap<>();
 
 @FXML
@@ -53,6 +55,12 @@ private void handleInput() {
   Platform.runLater(() -> txtInput.requestFocus());
   if (code.isEmpty()) return;
 
+  String cachedName = cache.get(code);
+  if (cachedName != null) {
+    lstItems.getItems().add(cachedName);
+    return;
+  }
+
   String url = "https://api.upcitemdb.com/prod/trial/lookup?upc=" + code;
 
   HTTP.sendAsync(
@@ -62,9 +70,34 @@ private void handleInput() {
   .thenApply(HttpResponse::body)
   .thenApply(this::parseTitle)
   .exceptionally(e -> null)
-  .thenAccept(name -> Platform.runLater(() ->
-      lstItems.getItems().add(name == null ? code : name)
-  ));
+  .thenAccept(name -> Platform.runLater(() -> {
+    String finalName = (name == null || name.isBlank()) ? code : name.trim();
+    lstItems.getItems().add(finalName);
+
+    if (name != null && !name.isBlank()) {
+      cache.put(code, finalName);
+      appendCache(code, finalName);
+    }
+  }));
+}
+
+private void loadCache() {
+  if (!Files.exists(CACHE)) return;
+  try {
+    for (String line : Files.readAllLines(CACHE, StandardCharsets.UTF_8)) {
+      if (line.isBlank()) continue;
+      String[] parts = line.split(",", 2);
+      if (parts.length == 2) cache.put(parts[0], unescape(parts[1]));
+    }
+  } catch (IOException ignored) {}
+}
+
+private void appendCache(String code, String name) {
+  try {
+    String row = code + "," + escape(name) + System.lineSeparator();
+    Files.writeString(CACHE, row, StandardCharsets.UTF_8,
+        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+  } catch (IOException ignored) {}
 }
 
 private String parseTitle(String json) {
@@ -73,11 +106,24 @@ private String parseTitle(String json) {
     var items = root.get("items");
     if (items == null || items.isEmpty()) return null;
     var title = items.get(0).get("title");
-    return title.asText().split(" - ")[0];
+    return title == null ? null : title.asText();
   } catch (Exception e) {
     return null;
   }
 }
+
+private String escape(String s) {
+  return "\"" + s.replace("\"", "\"\"") + "\"";
+}
+
+private String unescape(String s) {
+  s = s.trim();
+  if (s.startsWith("\"") && s.endsWith("\"") && s.length() >= 2) {
+    s = s.substring(1, s.length() - 1).replace("\"\"", "\"");
+  }
+  return s;
+}
+
 
 
 }
