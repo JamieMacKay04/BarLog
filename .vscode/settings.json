@@ -10,7 +10,10 @@
         "c:\\Users\\jasma\\Desktop\\javafx-sdk-25.0.1\\lib\\jfx.incubator.input.jar",
         "c:\\Users\\jasma\\Desktop\\javafx-sdk-25.0.1\\lib\\jfx.incubator.richtext.jar",
         "c:\\Users\\jasma\\Desktop\\javafx-sdk-25.0.1\\lib\\javafx.swing.jar",
-        "c:\\Users\\jasma\\Desktop\\javafx-sdk-25.0.1\\lib\\javafx.fxml.jar"
+        "c:\\Users\\jasma\\Desktop\\javafx-sdk-25.0.1\\lib\\javafx.fxml.jar",
+        "barLog/lib/jackson-annotations-2.17.2.jar",
+        "barLog/lib/jackson-core-2.17.2.jar",
+        "barLog/lib/jackson-databind-2.17.2.jar"
     ],
     "java.project.sourcePaths": [
         "."
