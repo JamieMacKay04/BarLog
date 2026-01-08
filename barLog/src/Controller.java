@@ -74,10 +74,9 @@ private void handleInput() {
     String finalName = (name == null || name.isBlank()) ? code : name.trim();
     lstItems.getItems().add(finalName);
 
-    if (name != null && !name.isBlank()) {
-      cache.put(code, finalName);
-      appendCache(code, finalName);
-    }
+cache.put(code, finalName);
+appendCache(code, finalName);
+
   }));
 }
 
@@ -94,19 +93,26 @@ private void loadCache() {
 
 private void appendCache(String code, String name) {
   try {
+    Files.createDirectories(CACHE.getParent());
+    System.out.println("Saving to: " + CACHE.toAbsolutePath());
+
     String row = code + "," + escape(name) + System.lineSeparator();
     Files.writeString(CACHE, row, StandardCharsets.UTF_8,
         StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-  } catch (IOException ignored) {}
+
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
 }
+
 
 private String parseTitle(String json) {
   try {
-    var root = MAPPER.readTree(json);
-    var items = root.get("items");
-    if (items == null || items.isEmpty()) return null;
-    var title = items.get(0).get("title");
-    return title == null ? null : title.asText();
+    return MAPPER.readTree(json)
+      .path("items")
+      .path(0)
+      .path("title")
+      .asText(null);
   } catch (Exception e) {
     return null;
   }
