@@ -1,15 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" style="-fx-text-fill: white; -fx-background-color: #CFCFCF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barLog.src.Controller">
    <children>
-      <Button layoutX="245.0" layoutY="286.0" mnemonicParsing="false" onAction="#onBtnClick" prefHeight="67.0" prefWidth="110.0" text="OK" textFill="#942121" />
-      <TextField fx:id="tfname" layoutX="226.0" layoutY="175.0" text="Your Name" />
-      <Label alignment="CENTER" layoutX="245.0" layoutY="67.0" prefHeight="17.0" prefWidth="110.0" text="Label" />
+      <MenuBar prefHeight="75.0" prefWidth="750.0" style="-fx-background-color: #2d3819; -fx-text-base-color: white; -fx-font-family: Calibri; -fx-font-size: 20px;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="675.0" prefHeight="75.0" prefWidth="75.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="243.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/mar%20hall%20logo.jpeg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="75.0" prefWidth="426.0">
+         <children>
+            <Text fill="WHITE" layoutX="7.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="BarLog" wrappingWidth="426.0" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f4a11" height="10.0" layoutX="-71.0" layoutY="72.0" stroke="#1e8f4300" strokeType="INSIDE" width="773.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="-18.0" />
+      <Button fx:id="btnSubmit" layoutX="520.0" layoutY="327.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="143.0" style="-fx-background-color: #2d3819;" text="Submit" textFill="WHITE">
+         <font>
+            <Font name="Corbel" size="24.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtInput" layoutX="439.0" layoutY="530.0" onAction="#handleInput" prefHeight="32.0" prefWidth="266.0" />
+      <ListView fx:id="lstItems" layoutX="23.0" layoutY="106.0" prefHeight="590.0" prefWidth="393.0" />
    </children>
 </AnchorPane>
