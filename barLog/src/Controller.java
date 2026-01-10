@@ -152,6 +152,8 @@ private void sendSubmit() {
   } catch (IOException e) {
     e.printStackTrace();
   }
+
+  lstItems.getItems().clear();
 }
 
 
@@ -232,6 +234,10 @@ private void goTransfers(ActionEvent e) {
   Navigator.go(e, "transfers.fxml");
 }
 
+@FXML
+private void goHotelBar(ActionEvent e) {
+  Navigator.go(e, "hotelBar.fxml");
+}
 
 }
 
