@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" style="-fx-text-fill: white; -fx-background-color: #CFCFCF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barLog.src.hotelBar">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" style="-fx-text-fill: white; -fx-background-color: #CFCFCF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barLog.src.marquee">
    <children>
       <ImageView fitHeight="765.0" fitWidth="765.0" layoutX="-8.0" layoutY="-8.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -31,7 +31,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="75.0" prefWidth="426.0">
          <children>
-            <Text fill="WHITE" layoutX="7.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Hotel Bar" wrappingWidth="426.0" AnchorPane.leftAnchor="20.0">
+            <Text fill="WHITE" layoutX="7.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Marquee" wrappingWidth="426.0" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font size="44.0" />
                </font>
@@ -53,8 +53,8 @@
       </TableView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d3819" height="59.0" layoutX="-7.0" layoutY="691.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="758.0" />
       <Button fx:id="btnGoPosto" layoutX="14.0" layoutY="708.0" mnemonicParsing="false" onAction="#goPosto" prefHeight="25.0" prefWidth="136.0" text="Posto" />
-      <Button fx:id="btnGoBarLog" layoutX="455.0" layoutY="708.0" mnemonicParsing="false" onAction="#goBarLog" prefHeight="25.0" prefWidth="136.0" text="BarLog" />
-      <Button fx:id="btnGoMarquee" layoutX="162.0" layoutY="708.0" mnemonicParsing="false" onAction="#goMarquee" prefHeight="25.0" prefWidth="136.0" text="Marquee" />
+      <Button fx:id="btnHotelBar" layoutX="455.0" layoutY="708.0" mnemonicParsing="false" onAction="#goHotelBar" prefHeight="25.0" prefWidth="136.0" text="HotelBar" />
+      <Button fx:id="btnBarLog" layoutX="162.0" layoutY="708.0" mnemonicParsing="false" onAction="#goBarLog" prefHeight="25.0" prefWidth="136.0" text="BarLog" />
       <Button fx:id="btnGoMorton" layoutX="310.0" layoutY="708.0" mnemonicParsing="false" onAction="#goMorton" prefHeight="25.0" prefWidth="136.0" text="Morton" />
       <Button fx:id="btnGoTransfers" layoutX="600.0" layoutY="708.0" mnemonicParsing="false" onAction="#goTransfers" prefHeight="25.0" prefWidth="136.0" text="Transfers" />
    </children>

@@ -13,7 +13,6 @@ public class Main extends Application {
         Parent root = loader.load();
         Controller controller = loader.getController();
         controller.setMainWindow(primaryStage);
-        primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.show();
     }
