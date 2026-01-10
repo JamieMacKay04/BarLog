@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -41,6 +42,12 @@ public class hotelBar {
 
     @FXML
     private TableColumn<ItemCount, Integer> colQty;
+
+  @FXML private Button btnPosto;
+  @FXML private Button btnMarquee;
+  @FXML private Button btnMorton;
+  @FXML private Button btnBarLog;
+  @FXML private Button btnTransfers;
 
 
 public static class ItemCount {
@@ -121,6 +128,31 @@ private List<String> loadItemsForHotelBar(LocalDate from, LocalDate to) {
   } catch (IOException ignored) {}
 
   return out;
+}
+
+@FXML
+private void goPosto(ActionEvent e) {
+  Navigator.go(e, "posto.fxml");
+}
+
+@FXML
+private void goMarquee(ActionEvent e) {
+  Navigator.go(e, "marquee.fxml");
+}
+
+@FXML
+private void goMorton(ActionEvent e) {
+  Navigator.go(e, "morton.fxml");
+}
+
+@FXML
+private void goBarLog(ActionEvent e) {
+  Navigator.go(e, "mainScene.fxml");
+}
+
+@FXML
+private void goTransfers(ActionEvent e) {
+  Navigator.go(e, "transfers.fxml");
 }
 
 }

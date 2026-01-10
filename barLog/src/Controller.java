@@ -20,6 +20,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -206,6 +207,30 @@ private String unescape(String s) {
   return s;
 }
 
+@FXML
+private void goPosto(ActionEvent e) {
+  Navigator.go(e, "posto.fxml");
+}
+
+@FXML
+private void goMarquee(ActionEvent e) {
+  Navigator.go(e, "marquee.fxml");
+}
+
+@FXML
+private void goMorton(ActionEvent e) {
+  Navigator.go(e, "morton.fxml");
+}
+
+@FXML
+private void goBarLog(ActionEvent e) {
+  Navigator.go(e, "mainScene.fxml");
+}
+
+@FXML
+private void goTransfers(ActionEvent e) {
+  Navigator.go(e, "transfers.fxml");
+}
 
 
 }
