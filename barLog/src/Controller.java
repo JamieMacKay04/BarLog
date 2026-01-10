@@ -10,16 +10,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
+
 
 
 
@@ -37,15 +45,20 @@ public class Controller {
 
     @FXML private TextField txtInput;
     @FXML private ListView<String> lstItems;
+    @FXML private ComboBox<String> locationChoiceBox;
+    @FXML private Button btnSubmit;
+  
     private static final HttpClient HTTP = HttpClient.newHttpClient();
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final Path CACHE = Paths.get("data", "barLog_cache.csv"); // saved beside where you run the app
     private final Map<String, String> cache = new HashMap<>();
+    
 
 @FXML
 private void initialize() {
   loadCache();
   Platform.runLater(() -> txtInput.requestFocus());
+  locationChoiceBox.getItems().addAll("Hotel Bars", "Marquee", "Morton", "Il Posto");
 }
 
 @FXML
@@ -79,6 +92,69 @@ appendCache(code, finalName);
 
   }));
 }
+
+private Path getLocationFile(String location) {
+  return switch (location) {
+    case "Il Posto" -> Paths.get("data", "il_posto.csv");
+    case "Marquee" -> Paths.get("data", "marquee.csv");
+    case "Morton" -> Paths.get("data", "morton.csv");
+    case "Hotel Bar" -> Paths.get("data", "hotel_bar.csv");
+    case "Transfers" -> Paths.get("data", "transfers.csv");
+    default -> throw new IllegalStateException("Unknown location: " + location);
+  };
+}
+
+
+@FXML
+private void sendSubmit() {
+
+  if (locationChoiceBox.getValue() == null || locationChoiceBox.getValue().isEmpty()) {
+    System.out.println("Please select a location before submitting.");
+    return;
+  }
+
+  TextInputDialog dialog = new TextInputDialog();
+  dialog.setTitle("Submit");
+  dialog.setHeaderText("Enter your initials");
+  dialog.setContentText("Initials (2 letters):");
+
+  Optional<String> result = dialog.showAndWait();
+  if (result.isEmpty()) return;
+
+  String initials = result.get().trim().toUpperCase();
+  if (!initials.matches("[A-Z]{2}")) {
+    System.out.println("Initials must be exactly 2 letters.");
+    return;
+  }
+
+  String transferId = UUID.randomUUID().toString();
+  String dateTime = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+  String location = locationChoiceBox.getValue();
+  String itemsJoined = String.join(" | ", lstItems.getItems());
+
+  Path file = Paths.get("data", "transfers.csv");
+
+  try {
+    Files.createDirectories(file.getParent());
+
+    String row =
+      transferId + "," +
+      dateTime + "," +
+      initials + "," +
+      location + "," +
+      escape(itemsJoined) +
+      System.lineSeparator();
+
+    Files.writeString(file, row, StandardCharsets.UTF_8,
+      StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+}
+
+
+
 
 private void loadCache() {
   if (!Files.exists(CACHE)) return;
@@ -133,4 +209,5 @@ private String unescape(String s) {
 
 
 }
+
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" style="-fx-text-fill: white; -fx-background-color: #CFCFCF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barLog.src.hotelBar">
+   <children>
+      <ImageView fitHeight="765.0" fitWidth="765.0" layoutX="-8.0" layoutY="-8.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/background.png" />
+         </image>
+      </ImageView>
+      <MenuBar prefHeight="75.0" prefWidth="750.0" style="-fx-background-color: #2d3819; -fx-text-base-color: white; -fx-font-family: Calibri; -fx-font-size: 20px;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="675.0" prefHeight="75.0" prefWidth="75.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="243.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/mar%20hall%20logo.jpeg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="75.0" prefWidth="426.0">
+         <children>
+            <Text fill="WHITE" layoutX="7.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Hotel Bar" wrappingWidth="426.0" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f4a11" height="10.0" layoutX="-71.0" layoutY="72.0" stroke="#1e8f4300" strokeType="INSIDE" strokeWidth="0.0" width="751.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
+      <DatePicker fx:id="dateFrom" layoutX="178.0" layoutY="132.0" prefHeight="46.0" prefWidth="197.0" promptText="Date From" />
+      <DatePicker fx:id="dateTo" layoutX="178.0" layoutY="207.0" prefHeight="46.0" prefWidth="197.0" promptText="Date To" />
+      <Button fx:id="btnApply" layoutX="432.0" layoutY="162.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="158.0" text="Apply" />
+      <TableView fx:id="tvIntake" layoutX="68.0" layoutY="366.0" prefHeight="285.0" prefWidth="614.0">
+        <columns>
+          <TableColumn fx:id="colItem" prefWidth="422.0" text="Item Name" />
+          <TableColumn fx:id="colQty" prefWidth="191.0" resizable="false" text="Quantity" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>
