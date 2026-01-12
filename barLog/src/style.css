@@ -1,0 +1,14 @@
+.transfer-card {
+    -fx-padding: 10;
+    -fx-spacing: 6;
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 8;
+}
+
+.list-cell:selected .transfer-card {
+    -fx-background-color: #f0f0f0;
+}
+
+.list-cell:selected .transfer-card .label {
+    -fx-text-fill: black;
+}
