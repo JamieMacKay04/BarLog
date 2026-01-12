@@ -44,7 +44,7 @@ public class Controller {
     @FXML
     private TextField tfname;
 
-    private Stage mainWindow; 
+    private Stage mainWindow;
 
     public void setMainWindow(Stage mainWindow) {
         this.mainWindow = mainWindow;
