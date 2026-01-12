@@ -59,7 +59,7 @@ public class Controller {
 private void initialize() {
   loadCache();
   Platform.runLater(() -> txtInput.requestFocus());
-  locationChoiceBox.getItems().addAll("Hotel Bars", "Marquee", "Morton", "Il Posto");
+  locationChoiceBox.getItems().addAll("Hotel Bar", "Marquee", "Morton", "Il Posto");
 }
 
 @FXML
@@ -105,6 +105,13 @@ private Path getLocationFile(String location) {
   };
 }
 
+Map<String, String> venueFiles = Map.of(
+    "Marquee", "data/marquee.csv",
+    "Morton", "data/morton.csv",
+    "Posto", "data/posto.csv"
+);
+
+
 
 @FXML
 private void sendSubmit() {
@@ -148,6 +155,23 @@ private void sendSubmit() {
 
     Files.writeString(file, row, StandardCharsets.UTF_8,
       StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+      
+      Path destinationFile = getLocationFile(location);
+
+for (String item : lstItems.getItems()) {
+    String venueRow =
+        dateTime + "," +
+        escape(item) +
+        System.lineSeparator();
+
+    Files.writeString(
+        destinationFile,
+        venueRow,
+        StandardCharsets.UTF_8,
+        StandardOpenOption.CREATE,
+        StandardOpenOption.APPEND
+    );
+}
 
   } catch (IOException e) {
     e.printStackTrace();
