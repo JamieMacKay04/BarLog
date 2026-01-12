@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" style="-fx-text-fill: white; -fx-background-color: #CFCFCF;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barLog.src.transfers">
+   <children>
+      <ImageView fitHeight="765.0" fitWidth="765.0" layoutX="-8.0" layoutY="-8.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/background.png" />
+         </image>
+      </ImageView>
+      <MenuBar prefHeight="75.0" prefWidth="750.0" style="-fx-background-color: #2d3819; -fx-text-base-color: white; -fx-font-family: Calibri; -fx-font-size: 20px;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="675.0" prefHeight="75.0" prefWidth="75.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="243.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/mar%20hall%20logo.jpeg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="75.0" prefWidth="426.0">
+         <children>
+            <Text fill="WHITE" layoutX="7.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Transfers" wrappingWidth="426.0" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d3819" height="59.0" layoutX="-4.0" layoutY="691.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="758.0" />
+      <Button fx:id="btnGoPosto" layoutX="30.0" layoutY="708.0" mnemonicParsing="false" onAction="#goPosto" prefHeight="25.0" prefWidth="136.0" text="Posto" />
+      <Button fx:id="btnHotelBar" layoutX="580.0" layoutY="708.0" mnemonicParsing="false" onAction="#goHotelBar" prefHeight="25.0" prefWidth="136.0" text="Hotel Bar" />
+      <Button fx:id="btnGoMarquee" layoutX="215.0" layoutY="708.0" mnemonicParsing="false" onAction="#goMarquee" prefHeight="25.0" prefWidth="136.0" text="Marquee" />
+      <Button fx:id="btnGoMorton" layoutX="404.0" layoutY="708.0" mnemonicParsing="false" onAction="#goMorton" prefHeight="25.0" prefWidth="136.0" text="Morton" />
+      <ListView fx:id="transfersListView" layoutX="62.0" layoutY="87.0" prefHeight="594.0" prefWidth="594.0" />
+   </children>
+</AnchorPane>

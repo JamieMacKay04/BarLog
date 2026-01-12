@@ -17,8 +17,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -59,7 +57,6 @@ public class Controller {
     @FXML private Button btnSubmit;
   
     private static final HttpClient HTTP = HttpClient.newHttpClient();
-    private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final Path CACHE = Paths.get("data", "barLog_cache.csv"); // saved beside where you run the app
     private final Map<String, String> cache = new HashMap<>();
     
@@ -69,6 +66,16 @@ private void initialize() {
   loadCache();
   Platform.runLater(() -> txtInput.requestFocus());
   locationChoiceBox.getItems().addAll("Hotel Bar", "Marquee", "Morton", "Il Posto");
+
+  lstItems.setOnMouseClicked(e -> {
+    if (e.getClickCount() == 1) {
+        String selected = lstItems.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            lstItems.getItems().remove(selected);
+        }
+    }
+});
+
 }
 
 @FXML
@@ -219,15 +226,21 @@ private void appendCache(String code, String name) {
 
 
 private String parseTitle(String json) {
-  try {
-    return MAPPER.readTree(json)
-      .path("items")
-      .path(0)
-      .path("title")
-      .asText(null);
-  } catch (Exception e) {
-    return null;
-  }
+  if (json == null) return null;
+
+  int i = json.indexOf("\"title\"");
+  if (i < 0) return null;
+
+  int colon = json.indexOf(':', i);
+  if (colon < 0) return null;
+
+  int firstQuote = json.indexOf('"', colon + 1);
+  if (firstQuote < 0) return null;
+
+  int secondQuote = json.indexOf('"', firstQuote + 1);
+  if (secondQuote < 0) return null;
+
+  return json.substring(firstQuote + 1, secondQuote);
 }
 
 private String escape(String s) {
