@@ -74,7 +74,12 @@ private void initialize() {
   colItem.setCellValueFactory(new PropertyValueFactory<>("item"));
   colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
 
+    dateTo.setValue(java.time.LocalDate.now());
+    dateFrom.setValue(java.time.LocalDate.now().minusDays(7));
+
   btnApply.setOnAction(e -> applyFilter());
+
+  applyFilter();
 }
 
 

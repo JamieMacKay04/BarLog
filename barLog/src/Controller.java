@@ -20,13 +20,21 @@ import java.util.UUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
@@ -38,11 +46,12 @@ public class Controller {
     @FXML
     private TextField tfname;
 
-    private Stage mainWindow; //Define mainWindow as a variable of type Stage
+    private Stage mainWindow; 
 
     public void setMainWindow(Stage mainWindow) {
-        this.mainWindow = mainWindow; //Setter method to set the mainWindow variable
+        this.mainWindow = mainWindow;
     }
+
 
     @FXML private TextField txtInput;
     @FXML private ListView<String> lstItems;
@@ -232,6 +241,63 @@ private String unescape(String s) {
   }
   return s;
 }
+
+@FXML
+private void editBarcode(ActionEvent e) {
+  Dialog<ButtonType> dialog = new Dialog<>();
+  dialog.setTitle("Add Barcode Override");
+
+  ButtonType save = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+  dialog.getDialogPane().getButtonTypes().addAll(save, ButtonType.CANCEL);
+
+  TextField codeField = new TextField();
+  codeField.setPromptText("Barcode / UPC");
+
+  TextField nameField = new TextField();
+  nameField.setPromptText("Product name");
+
+  GridPane grid = new GridPane();
+  grid.setHgap(10);
+  grid.setVgap(10);
+  grid.add(new Label("Code:"), 0, 0);
+  grid.add(codeField, 1, 0);
+  grid.add(new Label("Name:"), 0, 1);
+  grid.add(nameField, 1, 1);
+
+  dialog.getDialogPane().setContent(grid);
+
+  Node saveBtn = dialog.getDialogPane().lookupButton(save);
+  saveBtn.setDisable(true);
+
+  ChangeListener<String> validator = (obs, o, n) -> {
+    saveBtn.setDisable(codeField.getText().trim().isEmpty() || nameField.getText().trim().isEmpty());
+  };
+  codeField.textProperty().addListener(validator);
+  nameField.textProperty().addListener(validator);
+
+  Platform.runLater(codeField::requestFocus);
+
+  dialog.showAndWait().ifPresent(btn -> {
+    if (btn != save) return;
+
+    String code = codeField.getText().trim();
+    String name = nameField.getText().trim();
+
+    if (cache.containsKey(code)) {
+      Alert a = new Alert(Alert.AlertType.ERROR);
+      a.setTitle("Duplicate barcode");
+      a.setHeaderText("That barcode already exists");
+      a.setContentText("Code: " + code + "\nCurrent name: " + cache.get(code));
+      a.showAndWait();
+      return;
+    }
+
+    cache.put(code, name);
+    appendCache(code, name); // writes to barLog_cache.csv
+  });
+}
+
+
 
 @FXML
 private void goPosto(ActionEvent e) {

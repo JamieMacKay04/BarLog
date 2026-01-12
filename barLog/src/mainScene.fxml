@@ -39,7 +39,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <Button fx:id="btnSubmit" layoutX="520.0" layoutY="569.0" mnemonicParsing="false" onAction="#sendSubmit" prefHeight="97.0" prefWidth="143.0" style="-fx-background-color: #2d3819;" text="Submit" textFill="WHITE">
+      <Button fx:id="btnSubmit" layoutX="520.0" layoutY="447.0" mnemonicParsing="false" onAction="#sendSubmit" prefHeight="75.0" prefWidth="143.0" style="-fx-background-color: #2d3819;" text="Submit" textFill="WHITE">
          <font>
             <Font name="Corbel" size="24.0" />
          </font>
@@ -58,5 +58,10 @@
       <Button fx:id="btnGoMarquee" layoutX="166.0" layoutY="708.0" mnemonicParsing="false" onAction="#goMarquee" prefHeight="25.0" prefWidth="136.0" text="Marquee" />
       <Button fx:id="btnGoMorton" layoutX="310.0" layoutY="708.0" mnemonicParsing="false" onAction="#goMorton" prefHeight="25.0" prefWidth="136.0" text="Morton" />
       <Button fx:id="btnGoTransfers" layoutX="603.0" layoutY="708.0" mnemonicParsing="false" onAction="#goTransfers" prefHeight="25.0" prefWidth="136.0" text="Transfers" />
+      <Button layoutX="510.0" layoutY="559.0" mnemonicParsing="false" onAction="#editBarcode" prefHeight="75.0" prefWidth="163.0" style="-fx-background-color: #2d3819;" text="Edit Barcode" textFill="WHITE">
+         <font>
+            <Font name="Corbel" size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
