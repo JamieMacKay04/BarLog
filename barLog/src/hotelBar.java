@@ -96,7 +96,7 @@ private void applyFilter() {
 }
 
 private List<String> loadItemsForHotelBar(LocalDate from, LocalDate to) {
-  Path file = Paths.get("data", "transfers.csv");
+  Path file = Paths.get("data", "hotel_bar.csv");
   if (!Files.exists(file)) return List.of();
 
   List<String> out = new ArrayList<>();
@@ -105,30 +105,26 @@ private List<String> loadItemsForHotelBar(LocalDate from, LocalDate to) {
     for (String line : Files.readAllLines(file, StandardCharsets.UTF_8)) {
       if (line.isBlank()) continue;
 
-      String[] parts = line.split(",", 5);
-      if (parts.length < 5) continue;
+      String[] parts = line.split(",", 2);
+      if (parts.length < 2) continue;
 
-      String dateTimeStr = parts[1];
-      String location = parts[3];
-      String itemsJoined = Utils.unescape(parts[4]);
-
-
-      if (!"Hotel Bar".equals(location)) continue;
+      String dateTimeStr = parts[0].trim();
+      String item = Utils.unescape(parts[1]).trim();
 
       LocalDate d = LocalDateTime.parse(dateTimeStr).toLocalDate();
 
       if (from != null && d.isBefore(from)) continue;
       if (to != null && d.isAfter(to)) continue;
 
-      for (String item : itemsJoined.split("\\s\\|\\s")) {
-        String trimmed = item.trim();
-        if (!trimmed.isEmpty()) out.add(trimmed);
-      }
+      if (!item.isEmpty()) out.add(item);
     }
-  } catch (IOException ignored) {}
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
 
   return out;
 }
+
 
 @FXML
 private void goPosto(ActionEvent e) {

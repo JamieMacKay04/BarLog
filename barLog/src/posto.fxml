@@ -41,7 +41,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f4a11" height="10.0" layoutX="-71.0" layoutY="72.0" stroke="#1e8f4300" strokeType="INSIDE" strokeWidth="0.0" width="751.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
       <DatePicker fx:id="dateFrom" layoutX="178.0" layoutY="132.0" prefHeight="46.0" prefWidth="197.0" promptText="Date From" />
       <DatePicker fx:id="dateTo" layoutX="178.0" layoutY="207.0" prefHeight="46.0" prefWidth="197.0" promptText="Date To" />
-      <Button fx:id="btnApply" layoutX="432.0" layoutY="162.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="158.0" text="Apply" />
+      <Button fx:id="btnApply" layoutX="432.0" layoutY="162.0" mnemonicParsing="false" onAction="#goPosto" prefHeight="75.0" prefWidth="158.0" text="Apply" />
       <TableView fx:id="tvIntake" layoutX="68.0" layoutY="366.0" prefHeight="285.0" prefWidth="614.0">
         <columns>
           <TableColumn fx:id="colItem" prefWidth="422.0" text="Item Name" />
