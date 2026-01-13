@@ -58,6 +58,7 @@ public class Controller {
   
     private static final HttpClient HTTP = HttpClient.newHttpClient();
     private static final Path CACHE = Paths.get("data", "barLog_cache.csv"); // saved beside where you run the app
+    private static final Path STOCK = Paths.get("data", "stock.csv");
     private final Map<String, String> cache = new HashMap<>();
     
 
@@ -156,6 +157,43 @@ private void sendSubmit() {
   String location = locationChoiceBox.getValue();
   String itemsJoined = String.join(" | ", lstItems.getItems());
 
+  Map<String, Integer> transferCounts = countItems(lstItems);
+  Map<String, Integer> stock = Utils.readStock(STOCK);
+  StringBuilder missing = new StringBuilder();
+  transferCounts.forEach((item, qty) -> {
+    int have = stock.getOrDefault(item, 0);
+    if (have < qty) {
+      if (missing.length() > 0) missing.append("\n");
+      missing.append(item).append(" (need ").append(qty).append(", have ").append(have).append(")");
+    }
+  });
+
+  if (missing.length() > 0) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Insufficient Stock");
+    alert.setHeaderText("Not enough stock to transfer");
+    alert.setContentText(missing.toString());
+    alert.showAndWait();
+    return;
+  }
+
+  transferCounts.forEach((item, qty) -> {
+    int remaining = stock.getOrDefault(item, 0) - qty;
+    if (remaining > 0) {
+      stock.put(item, remaining);
+    } else {
+      stock.remove(item);
+    }
+  });
+
+  if (!Utils.writeStock(STOCK, stock)) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Stock Error");
+    alert.setHeaderText("Failed to update stock.csv");
+    alert.showAndWait();
+    return;
+  }
+
   Path file = Paths.get("data", "transfers.csv");
 
   try {
@@ -222,6 +260,15 @@ private void appendCache(String code, String name) {
   } catch (IOException e) {
     e.printStackTrace();
   }
+}
+
+private Map<String, Integer> countItems(ListView<String> list) {
+  Map<String, Integer> counts = new HashMap<>();
+  for (String item : list.getItems()) {
+    if (item == null || item.isBlank()) continue;
+    counts.merge(item, 1, Integer::sum);
+  }
+  return counts;
 }
 
 
@@ -342,6 +389,9 @@ private void goHotelBar(ActionEvent e) {
   Navigator.go(e, "hotelBar.fxml");
 }
 
+@FXML
+private void goStock(ActionEvent e) {
+  Navigator.go(e, "stock.fxml");
 }
 
-
+}

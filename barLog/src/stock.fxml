@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" style="-fx-text-fill: white; -fx-background-color: #CFCFCF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barLog.src.stock">
+   <children>
+      <ImageView fitHeight="765.0" fitWidth="765.0" layoutX="-8.0" layoutY="-8.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/background.png" />
+         </image>
+      </ImageView>
+      <MenuBar prefHeight="75.0" prefWidth="750.0" style="-fx-background-color: #2d3819; -fx-text-base-color: white; -fx-font-family: Calibri; -fx-font-size: 20px;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="675.0" prefHeight="75.0" prefWidth="75.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="243.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/mar%20hall%20logo.jpeg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="75.0" prefWidth="426.0">
+         <children>
+            <Text fill="WHITE" layoutX="7.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Stock" wrappingWidth="426.0" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <ListView fx:id="lstItems" layoutX="17.0" layoutY="180.0" prefHeight="485.0" prefWidth="354.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2d3819" height="59.0" layoutX="-4.0" layoutY="691.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="758.0" />
+      <Button fx:id="btnGoPosto" layoutX="17.0" layoutY="708.0" mnemonicParsing="false" onAction="#goPosto" prefHeight="25.0" prefWidth="136.0" text="Posto" />
+      <Button fx:id="goBarLog" layoutX="455.0" layoutY="708.0" mnemonicParsing="false" onAction="#goBarLog" prefHeight="25.0" prefWidth="136.0" text="Hotel Bar" />
+      <Button fx:id="btnGoMarquee" layoutX="166.0" layoutY="708.0" mnemonicParsing="false" onAction="#goMarquee" prefHeight="25.0" prefWidth="136.0" text="Marquee" />
+      <Button fx:id="btnGoMorton" layoutX="310.0" layoutY="708.0" mnemonicParsing="false" onAction="#goMorton" prefHeight="25.0" prefWidth="136.0" text="Morton" />
+      <Button fx:id="btnGoTransfers" layoutX="603.0" layoutY="708.0" mnemonicParsing="false" onAction="#goTransfers" prefHeight="25.0" prefWidth="136.0" text="Transfers" />
+      <TableView fx:id="tvCurrent" layoutX="403.0" layoutY="180.0" prefHeight="485.0" prefWidth="333.0">
+        <columns>
+          <TableColumn fx:id="colItem" prefWidth="288.0" text="Item" />
+          <TableColumn fx:id="colQty" prefWidth="44.0" text="Qty" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnSubmit" layoutX="123.0" layoutY="90.0" mnemonicParsing="false" onAction="#sendSubmit" prefHeight="75.0" prefWidth="143.0" style="-fx-background-color: #2d3819;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Corbel" size="24.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtInput" layoutX="420.0" layoutY="101.0" onAction="#handleInput" prefHeight="52.0" prefWidth="305.0" promptText="Tap here if the scans not working" />
+   </children>
+</AnchorPane>
