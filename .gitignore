@@ -34,3 +34,4 @@ out/
 # build output
 dist/
 out/
+data/*.csv 
