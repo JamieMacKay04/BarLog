@@ -52,11 +52,16 @@
           <TableColumn fx:id="colQty" prefWidth="44.0" text="Qty" />
         </columns>
       </TableView>
-      <Button fx:id="btnSubmit" layoutX="123.0" layoutY="90.0" mnemonicParsing="false" onAction="#sendSubmit" prefHeight="75.0" prefWidth="143.0" style="-fx-background-color: #2d3819;" text="Update" textFill="WHITE">
+      <Button fx:id="btnSubmit" layoutX="23.0" layoutY="90.0" mnemonicParsing="false" onAction="#sendSubmit" prefHeight="75.0" prefWidth="143.0" style="-fx-background-color: #2d3819;" text="Update" textFill="WHITE">
          <font>
             <Font name="Corbel" size="24.0" />
          </font>
       </Button>
       <TextField fx:id="txtInput" layoutX="420.0" layoutY="101.0" onAction="#handleInput" prefHeight="52.0" prefWidth="305.0" promptText="Tap here if the scans not working" />
+      <Button fx:id="btnSubmit2" layoutX="211.0" layoutY="90.0" mnemonicParsing="false" onAction="#editBarcode" prefHeight="75.0" prefWidth="160.0" style="-fx-background-color: #2d3819;" text="Edit Barcode" textFill="WHITE">
+         <font>
+            <Font name="Corbel" size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
