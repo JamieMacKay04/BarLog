@@ -395,3 +395,8 @@ private void goStock(ActionEvent e) {
 }
 
 }
+
+//TODO #1 : Add better front end formatting.
+//TODO #2 : Implement cloud based backend
+//TODO #3 Implement options that allow the user to create reports using the data inside the app.
+//TODO #4 Implement manditory backups to the cloud or locally.

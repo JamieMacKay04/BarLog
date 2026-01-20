@@ -7,3 +7,4 @@ C:\Users\jasma\Desktop\BarLog\barLog\src\Navigator.java
 C:\Users\jasma\Desktop\BarLog\barLog\src\posto.java
 C:\Users\jasma\Desktop\BarLog\barLog\src\transfers.java
 C:\Users\jasma\Desktop\BarLog\barLog\src\Utils.java
+C:\Users\jasma\Desktop\BarLog\barLog\src\stock.java
