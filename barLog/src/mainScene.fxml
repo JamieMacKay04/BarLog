@@ -63,5 +63,10 @@
             <Font name="Corbel" size="24.0" />
          </font>
       </Button>
+      <Button fx:id="goStock" layoutX="27.0" layoutY="84.0" mnemonicParsing="false" onAction="#goStock" prefHeight="35.0" prefWidth="12.0" style="-fx-background-color: #2d3819;" text="+" textFill="WHITE">
+         <font>
+            <Font name="Corbel" size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
