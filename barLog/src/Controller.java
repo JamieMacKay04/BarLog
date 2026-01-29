@@ -343,20 +343,27 @@ private void editBarcode(ActionEvent e) {
     String code = codeField.getText().trim();
     String name = nameField.getText().trim();
 
-    if (cache.containsKey(code)) {
-      Alert a = new Alert(Alert.AlertType.ERROR);
-      a.setTitle("Duplicate barcode");
-      a.setHeaderText("That barcode already exists");
-      a.setContentText("Code: " + code + "\nCurrent name: " + cache.get(code));
-      a.showAndWait();
-      return;
-    }
-
     cache.put(code, name);
-    appendCache(code, name); // writes to barLog_cache.csv
+    writeCache(); // overwrite cache so edits replace existing entries
   });
 }
 
+private void writeCache() {
+  try {
+    Files.createDirectories(CACHE.getParent());
+    StringBuilder out = new StringBuilder();
+    for (Map.Entry<String, String> entry : cache.entrySet()) {
+      out.append(entry.getKey())
+         .append(",")
+         .append(escape(entry.getValue()))
+         .append(System.lineSeparator());
+    }
+    Files.writeString(CACHE, out.toString(), StandardCharsets.UTF_8,
+        StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+}
 
 
 @FXML
