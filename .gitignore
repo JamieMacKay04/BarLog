@@ -37,3 +37,7 @@ out/
 data/*.csv 
 deps/
 package-input/
+runtime-image/
+review-out/
+review-runtime-*/
+review-logs/

@@ -57,8 +57,8 @@ public class Controller {
     @FXML private Button btnSubmit;
   
     private static final HttpClient HTTP = HttpClient.newHttpClient();
-    private static final Path CACHE = Paths.get("data", "barLog_cache.csv"); // saved beside where you run the app
-    private static final Path STOCK = Paths.get("data", "stock.csv");
+    private static final Path CACHE = Utils.dataFile("barLog_cache.csv");
+    private static final Path STOCK = Utils.dataFile("stock.csv");
     private final Map<String, String> cache = new HashMap<>();
     
 
@@ -113,11 +113,11 @@ appendCache(code, finalName);
 
 private Path getLocationFile(String location) {
   return switch (location) {
-    case "Il Posto" -> Paths.get("data", "il_posto.csv");
-    case "Marquee" -> Paths.get("data", "marquee.csv");
-    case "Morton" -> Paths.get("data", "morton.csv");
-    case "Hotel Bar" -> Paths.get("data", "hotel_bar.csv");
-    case "Transfers" -> Paths.get("data", "transfers.csv");
+    case "Il Posto" -> Utils.dataFile("il_posto.csv");
+    case "Marquee" -> Utils.dataFile("marquee.csv");
+    case "Morton" -> Utils.dataFile("morton.csv");
+    case "Hotel Bar" -> Utils.dataFile("hotel_bar.csv");
+    case "Transfers" -> Utils.dataFile("transfers.csv");
     default -> throw new IllegalStateException("Unknown location: " + location);
   };
 }
@@ -194,7 +194,7 @@ private void sendSubmit() {
     return;
   }
 
-  Path file = Paths.get("data", "transfers.csv");
+  Path file = Utils.dataFile("transfers.csv");
 
   try {
     Files.createDirectories(file.getParent());

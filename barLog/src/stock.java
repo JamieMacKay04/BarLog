@@ -68,8 +68,8 @@ public class stock {
   private TextField txtInput;
 
   private static final HttpClient HTTP = HttpClient.newHttpClient();
-  private static final Path CACHE = Paths.get("data", "barLog_cache.csv");
-  private static final Path STOCK = Paths.get("data", "stock.csv");
+  private static final Path CACHE = Utils.dataFile("barLog_cache.csv");
+  private static final Path STOCK = Utils.dataFile("stock.csv");
   private final Map<String, String> cache = new HashMap<>();
 
   public static class ItemCount {

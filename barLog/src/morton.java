@@ -66,7 +66,7 @@ private void initialize() {
     applyFilter();
 }
 
-private static final Path FILE = Paths.get("data", "morton.csv");
+private static final Path FILE = Utils.dataFile("morton.csv");
 
 @FXML
 private void applyFilter() {

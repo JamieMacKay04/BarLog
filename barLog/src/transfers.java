@@ -40,8 +40,7 @@ public class transfers {
     @FXML
     private ListView<Transfer> transfersListView;
 
-    private static final Path TRANSFERS =
-    Paths.get("data", "transfers.csv");
+    private static final Path TRANSFERS = Utils.dataFile("transfers.csv");
 
 private String aggregateItems(String raw) {
     String[] items = raw.split(" \\| ");
@@ -89,6 +88,7 @@ try {
         if (line.isBlank()) continue;
 
         String[] parts = line.split(",", 5);
+        if (parts.length < 5) continue;
         transfersListView.getItems().add(
             new Transfer(
                 parts[0],

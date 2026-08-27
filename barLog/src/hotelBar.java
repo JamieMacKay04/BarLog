@@ -101,7 +101,7 @@ private void applyFilter() {
 }
 
 private List<String> loadItemsForHotelBar(LocalDate from, LocalDate to) {
-  Path file = Paths.get("data", "hotel_bar.csv");
+  Path file = Utils.dataFile("hotel_bar.csv");
   if (!Files.exists(file)) return List.of();
 
   List<String> out = new ArrayList<>();

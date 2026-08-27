@@ -12,6 +12,20 @@ import java.util.TreeMap;
 
 public class Utils {
 
+  private static final Path DATA_DIR = resolveDataDirectory();
+
+  private static Path resolveDataDirectory() {
+    String localAppData = System.getenv("LOCALAPPDATA");
+    if (localAppData != null && !localAppData.isBlank()) {
+      return Path.of(localAppData, "BarLog", "data");
+    }
+    return Path.of(System.getProperty("user.home"), ".barlog", "data");
+  }
+
+  public static Path dataFile(String fileName) {
+    return DATA_DIR.resolve(fileName);
+  }
+
   public static String unescape(String s) {
     s = s.trim();
     if (s.startsWith("\"") && s.endsWith("\"") && s.length() >= 2) {

@@ -7,10 +7,17 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.Objects;
+
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainScene.fxml"));
+        URL mainScene = Objects.requireNonNull(
+            getClass().getResource("mainScene.fxml"),
+            "Missing application resource: mainScene.fxml"
+        );
+        FXMLLoader loader = new FXMLLoader(mainScene);
         Parent root = loader.load();
         Controller controller = loader.getController();
 
@@ -19,11 +26,8 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image(iconStream));
         }
 
-        var u = getClass().getResource("mhLogo.jpeg");
-        if (u != null) primaryStage.getIcons().add(new Image(u.toExternalForm()));
-
-
         controller.setMainWindow(primaryStage);
+        primaryStage.setTitle("BarLog");
         primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.show();
 
